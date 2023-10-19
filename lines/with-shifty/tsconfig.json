@@ -11,7 +11,7 @@
       "removeComments": true, // Remove comments from the compiled JavaScript
       "sourceMap": true,     // Generate source maps for debugging
   
-      "lib": ["es2015", "dom", "shifty"], // Libraries available in your project
+      "lib": ["es2015", "dom"], // Libraries available in your project
   
       "strictNullChecks": true, // Enable strict null checks
       "noImplicitAny": true,    // Avoid the 'any' type where possible
