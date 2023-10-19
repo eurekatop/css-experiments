@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      :root {
+        --width-box-1: 10px;
+        --x-box-1: 0px;
+        --y-box-1: 0px;
+        --color-box-1: #1f991f;
+      }
+      body {
+        background-color: white;
+        /*overflow: hidden;*/
+        font-size: 16px;
+      }
+      .box1 {
+        border-right: 1px solid;
+        border-color: var(--color-box-1);
+        width: 0px;
+        transform-origin: top left;
+        margin-bottom: 10px;
+        position: absolute;
+        text-align: center;
+        color: white;
+        background-color: beige;
+        opacity: 1;
+        overflow: hidden;
+      }
+
+      .centered-div {
+        width: 80vw;
+        height: 80vh;
+        background-color: #ccc;
+        text-align: center;
+        line-height: 80vh;
+        position: absolute;
+        margin: auto;
+      }
+
+      .transition01 {
+        width: 400px;
+        height: 400px;
+        border: 10px solid blue;
+        color: white;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+
+      h1 {
+        font-size: 240%;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="position: relative; top: 0px; left: 0px; overflow: visible">
+      <div id="transition01" class="transition01" style="overflow: hidden">
+        aa
+      </div>
+    </div>
+    <!-- div id="screen01" class="centered-div">
+      <h1 id="screen01_title">Mortadelo y Filemon</h1>
+    </div -->
+
+    <script>
+      const nodes = [];
+      const nodeTransition = document.getElementById("transition01");
+
+      function getLine(options) {
+        const node = document.createElement("div");
+        node.classList.add("box1");
+        node.style.setProperty("width", 0 + "px");
+        node.style.setProperty("height", 10 + "px");
+        nodeTransition.appendChild(node);
+
+        return node;
+      }
+
+      function drawLine(node, options) {
+        const { x, y, width, time, degrees, color } = options;
+        setTimeout(function () {
+          if (time !== undefined)
+            node.style.setProperty("transition", `width ${time}s`);
+          if (degrees !== undefined)
+            node.style.setProperty("transform", `rotate(${degrees}deg)`);
+          if (color !== undefined)
+            node.style.setProperty("background-color", color);
+          if (width !== undefined)
+            node.style.setProperty("width", width + "px");
+          if (y !== undefined) node.style.setProperty("top", y + "px");
+          if (x !== undefined) node.style.setProperty("left", x + "px");
+        }, 10);
+      }
+
+      function take01() {
+        // get lines
+        let color = 0;
+
+        const nodes = [];
+        for (let i = 0; i < 180; i++, nodes.push(getLine()));
+
+        const nodes2 = [];
+        for (let i = 0; i < 180; i++, nodes2.push(getLine()));
+
+        //////////
+        let i = 0;
+        let orix = Math.random() * 500;
+        let oriy = Math.random() * 500;
+        for (var node of nodes) {
+          i++;
+          drawLine(node, {
+            x: orix + i,
+            y: -80,
+            width: 1000,
+            time: 2,
+            degrees: 0 + i,
+            //color: `rgb(${i},255,0)`,
+            //color: `rgb(${i},${i},${i})`,
+            color: `black`,
+
+            //color: "white",
+          });
+        }
+
+        //////////
+        i = 0;
+        for (var node of nodes2) {
+          i++;
+          drawLine(node, {
+            x: 700 + i,
+            y: 1080,
+            width: 1500,
+            time: 1,
+            degrees: 0 - i,
+            //color: `rgb(${i},255,0)`,
+            //color: `rgb(${i},${i},${i})`,
+            color: `black`,
+            //color: "white",
+          });
+        }
+
+        // evento todas las transiciones finito
+        let countEndedTransitions = 0;
+        for (var node of nodes2) {
+          node.addEventListener("transitionend", () => {
+            countEndedTransitions++;
+            if (countEndedTransitions == 180) {
+              enTransition();
+            }
+          });
+        }
+
+        // end or next
+        function enTransition() {
+          // const screen = document.getElementById("screen01_title");
+          // screen01_title.innerHTML = "FullStack Developer";
+          for (var node of nodes2) {
+            drawLine(node, {
+              width: 0,
+              time: 1,
+            });
+          }
+          for (var node of nodes) {
+            drawLine(node, {
+              width: 0,
+              time: 1,
+            });
+          }
+        }
+
+        // reactive over countEndedTransitions
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          take01();
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

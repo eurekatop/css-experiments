@@ -1,0 +1,97 @@
+{
+    "Strapi CMS":
+      "Un sistema de gestión de contenido (CMS) de código abierto y flexible basado en Node.js.",
+    "Vue3": "Una biblioteca de JavaScript para crear interfaces de usuario interactivas y componentes reutilizables.",
+    "SCSS": "Un preprocesador de CSS que extiende las capacidades de CSS con características como variables y anidación.",
+    "Docker":
+      "Una plataforma de contenedorización que permite empaquetar aplicaciones y sus dependencias en contenedores.",
+    "Azure Devops":
+      "Un conjunto de herramientas para la gestión del ciclo de vida de aplicaciones, incluyendo planificación, desarrollo y despliegue.",
+    "Net Core":
+      ".NET Core es una plataforma de código abierto desarrollada por Microsoft que se utiliza para desarrollar aplicaciones de alto rendimiento y escalables.",
+    "Vue": "Un marco de desarrollo progresivo para la creación de aplicaciones web.",
+    "MongoDb":
+      "Una base de datos NoSQL de documentos que es altamente escalable y flexible.",
+    "MySql":
+      "Un sistema de gestión de bases de datos relacionales de código abierto.",
+    "WebComponents":
+      "Un conjunto de estándares web que permiten la creación de componentes reutilizables para aplicaciones web.",
+    "Node.js":
+      "Un entorno de tiempo de ejecución de JavaScript del lado del servidor que permite la ejecución de código JavaScript en el servidor.",
+    "SOA": "Arquitectura Orientada a Servicios (Service-Oriented Architecture) es un enfoque de diseño de software en el que los servicios se proporcionan como componentes independientes y reutilizables.",
+    "REST": "Representational State Transfer es un estilo de arquitectura de software que se utiliza para diseñar aplicaciones web escalables y eficientes.",
+    "Net 4.8":
+      ".NET Framework 4.8 es una plataforma de desarrollo de Microsoft para aplicaciones Windows.",
+    "Quasar Framework":
+      "Un marco de desarrollo de código abierto basado en Vue.js que se utiliza para crear aplicaciones multiplataforma.",
+    "Sql Server":
+      "Un sistema de gestión de bases de datos relacionales desarrollado por Microsoft.",
+    "SqlServer":
+      "Variante de SQL Server, también se refiere a la administración de bases de datos SQL de Microsoft.",
+    "T/SQL":
+      "Transact-SQL es un lenguaje de programación y consulta desarrollado por Microsoft para interactuar con bases de datos SQL Server.",
+    "DDD": "Domain-Driven Design es una metodología de diseño de software que se centra en el modelo de dominio del negocio.",
+    "API Rest":
+      "Una API (Interfaz de Programación de Aplicaciones) que sigue los principios de REST para la comunicación entre aplicaciones.",
+    "Api Rest": "Variante de 'API Rest'.",
+    "Api Soap":
+      "Una API basada en el Protocolo de Acceso a Objetos Simples (SOAP) para la comunicación entre aplicaciones.",
+    "Vanilla Javascript":
+      "JavaScript puro, sin el uso de marcos o bibliotecas adicionales.",
+    "Jquery":
+      "Una biblioteca de JavaScript que facilita la manipulación del DOM y la interacción con el navegador.",
+    "Oracle DB":
+      "Oracle Database es un sistema de gestión de bases de datos relacional de alto rendimiento desarrollado por Oracle.",
+    "GIT": "Un sistema de control de versiones distribuido ampliamente utilizado para el seguimiento de cambios en el código fuente.",
+    "FacturaE":
+      "Factura Electrónica, un estándar para la emisión de facturas en formato electrónico.",
+    "Crystal Reports":
+      "Una herramienta de generación de informes utilizada para crear informes detallados a partir de datos.",
+    "Angular2+":
+      "Un marco de desarrollo de aplicaciones web y móviles desarrollado por Google.",
+    "Node": "Puede referirse a Node.js.",
+    "Mysql":
+      "MySQL es un sistema de gestión de bases de datos relacionales de código abierto.",
+    "Java 1.8":
+      "Java 1.8 (también conocido como Java 8) es una versión de Java que introdujo importantes características como expresiones lambda.",
+    "Mithril":
+      "Un pequeño marco de JavaScript para el desarrollo de aplicaciones web de una sola página (SPA).",
+    "SPA": "Aplicación de una sola página (Single Page Application) que carga una sola página HTML y actualiza el contenido de manera dinámica.",
+    "OpenLayers":
+      "Una biblioteca de JavaScript para la creación de mapas interactivos en aplicaciones web.",
+    "Charts.js":
+      "Una biblioteca de gráficos de código abierto para la creación de gráficos y visualizaciones de datos en aplicaciones web.",
+    "NancyFx":
+      "Un marco de desarrollo web ligero para aplicaciones web basado en .NET.",
+    ".Net WebApi":
+      "Una plataforma para crear servicios web basados en HTTP utilizando .NET.",
+    "EntityFramework":
+      "Un conjunto de tecnologías de acceso a datos en .NET para el mapeo objeto-relacional (ORM).",
+    "Bash": "Un intérprete de comandos y un lenguaje de scripting en sistemas Unix y Unix-like.",
+    "UC4": "Una plataforma de automatización de la carga de trabajo y procesos de negocio.",
+    "MVC.NET":
+      "Model-View-Controller es un patrón de diseño para la creación de aplicaciones web.",
+    "PL/SQL":
+      "Un lenguaje de programación de bases de datos utilizado en Oracle Database.",
+    "Java": "Un lenguaje de programación de propósito general ampliamente utilizado.",
+    "FatWire Content Managent System 5.2":
+      "Un sistema de gestión de contenido web (CMS) de Oracle.",
+    "MVNForum": "Una aplicación de foro de código abierto escrita en Java.",
+    "Html": "Lenguaje de marcado utilizado para crear documentos web.",
+    "CSS": "Cascading Style Sheets, se utiliza para definir la presentación y el diseño de documentos web.",
+    "Javascript":
+      "Un lenguaje de programación ampliamente utilizado en el desarrollo web.",
+    "JQuery":
+      "Una biblioteca de JavaScript que simplifica la interacción con el DOM y la creación de efectos en las páginas web.",
+    "Sql": "Lenguaje de consulta estructurado utilizado para la gestión de bases de datos relacionales.",
+    "Php": "Un lenguaje de programación ampliamente utilizado en el desarrollo web.",
+    "PHP": "Variante de 'Php'.",
+    ".Net": "Plataforma de desarrollo de software de Microsoft.",
+    "Groovy":
+      "Un lenguaje de programación dinámico para la JVM (Máquina Virtual de Java).",
+    "Visual Basic for Applications":
+      "Un lenguaje de programación desarrollado por Microsoft utilizado en aplicaciones de Office y otros programas.",
+    "Fatwire Content Management System":
+      "Un sistema de gestión de contenido web de Oracle.",
+    "OpenMarket CMS": "Un sistema de gestión de contenido web."
+  }

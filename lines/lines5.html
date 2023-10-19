@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <!-- style motion-->
+    <style>
+      :root {
+        --width-box-1: 10px;
+        --x-box-1: 0px;
+        --y-box-1: 0px;
+        --screen01-width: 100vw;
+        --screen01-height: 80vh;
+
+        --color-line-box-1: #ccd;
+        --color-fill-box-1: white;
+      }
+      html {
+        font-size: 8px; /* TODO MEDIA QUERIE */
+      }
+      body {
+        background-color: black;
+        font-size: 16px;
+        margin: 0px;
+      }
+      .box1 {
+        border-right: 1px solid;
+        border-color: var(--color-line-box-1);
+        width: 0px;
+        height: 5rem;
+        transform-origin: top left;
+        margin-bottom: 10px;
+        position: absolute;
+        text-align: center;
+        color: white;
+        background-color: var(--color-fill-box-1);
+        opacity: 1;
+        overflow: hidden;
+      }
+
+      .screen01 {
+        width: var(--screen01-width);
+        height: var(--screen01-height);
+        background-color: #ccc;
+        text-align: center;
+        line-height: var(--screen01-height);
+        position: absolute;
+        overflow: hidden;
+        transition: height 1s;
+      }
+
+      .transition01 {
+        width: var(--screen01-width);
+        height: var(--screen01-height);
+        /*border: 10px solid blue;*/
+        color: white;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+
+      .content {
+        color: white;
+        position: relative;
+        top: var(--screen01-height);
+        left: 0px;
+        overflow: visible;
+        transition: top 1s;
+        visibility: hidden;
+      }
+
+      .lipsum {
+        background-color: white;
+        color: black;
+      }
+
+      .screen01_title h1 {
+        font-size: 4rem;
+      }
+
+      @media (max-width: 400px) {
+        .lipsum {
+          font-size: 12px;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          margin-left: 0rem;
+          margin-right: 0rem;
+        }
+      }
+      @media (min-width: 401px) and (max-width: 600px) {
+        .lipsum {
+          font-size: 14px;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          margin-left: 1rem;
+          margin-right: 1rem;
+        }
+      }
+      @media (min-width: 601px) and (max-width: 900px) {
+        .lipsum {
+          font-size: 15px;
+          padding-left: 3rem;
+          padding-right: 3rem;
+          margin-left: 10rem;
+          margin-right: 10rem;
+        }
+      }
+      @media (min-width: 901px) and (max-width: 1800px) {
+        .lipsum {
+          font-size: 17px;
+          padding-left: 5rem;
+          padding-right: 5rem;
+          margin-left: 20rem;
+          margin-right: 20rem;
+        }
+      }
+      @media (min-width: 1801px) {
+        .lipsum {
+          font-size: 18px;
+          padding-left: 10rem;
+          padding-right: 10rem;
+          margin-left: 40rem;
+          margin-right: 40rem;
+
+          /*margin-left: 20%;
+          margin-right: 20%;
+          margin-top: 30px;
+          margin-bottom: 25px;*/
+          max-width: 1000px;
+        }
+      }
+
+      h1 {
+        font-size: 240%;
+      }
+    </style>
+
+    <!-- content -->
+    <link rel="stylesheet" href="b.enjam.ino_panam_stylyng.css" />
+    <!-- end style content -->
+  </head>
+  <body>
+    <!-- header -->
+    <div style="position: relative; top: 0px; left: 0px; overflow: visible">
+      <div id="screen01" class="screen01">
+        <div class="screen01_title">
+          <h1 id="screen01_title">Mortadelo y Filemon</h1>
+        </div>
+      </div>
+      <!-- transition01 -->
+      <div style="position: relative; top: 0px; left: 0px; overflow: visible">
+        <div
+          id="transition01"
+          class="transition01"
+          style="overflow: hidden"
+        ></div>
+      </div>
+    </div>
+
+    <div id="content" class="content">
+      <!--todo MEDIAS -->
+
+      <!-- CV -->
+      <div id="lipsum" class="lipsum"></div>
+    </div>
+
+    <script>
+      const nodes = [];
+      const nodeTransition = document.getElementById("transition01");
+
+      function fireTranstion(node, property, srcValue, destValue, seconds) {
+        const _node = node;
+
+        _node.addEventListener("transitionend", () => {
+          console.log("transitioned " + node);
+        });
+
+        setTimeout(() => {
+          _node.style.setProperty(property, srcValue);
+          _node.style.setProperty("transition", `none`);
+          setTimeout(() => {
+            _node.style.setProperty("transition", `${property} ${seconds}s`);
+            _node.style.setProperty(property, destValue);
+            console.log("_node");
+            console.log(_node);
+          }, 600);
+        }, 100);
+      }
+
+      function getLine(options) {
+        const node = document.createElement("div");
+        node.classList.add("box1");
+        node.style.setProperty("width", 0 + "px");
+        nodeTransition.appendChild(node);
+
+        return node;
+      }
+
+      function drawLine(node, options) {
+        const { x, y, width, time, degrees, color } = options;
+        setTimeout(function () {
+          if (time !== undefined)
+            node.style.setProperty("transition", `width ${time}s`);
+          if (degrees !== undefined)
+            node.style.setProperty("transform", `rotate(${degrees}deg)`);
+          if (color !== undefined)
+            node.style.setProperty("background-color", color);
+          if (width !== undefined)
+            node.style.setProperty("width", width + "px");
+          if (y !== undefined) node.style.setProperty("top", y + "px");
+          if (x !== undefined) node.style.setProperty("left", x + "px");
+        }, 1);
+      }
+
+      function take01() {
+        // get lines
+        let color = 0;
+
+        const nodes = [];
+        for (let i = 0; i < 40; i++, nodes.push(getLine()));
+
+        const nodes2 = [];
+        for (let i = 0; i < 40; i++, nodes2.push(getLine()));
+
+        //////////
+        let i = 0;
+        let orix = 250; //Math.random() * 500;
+        let oriy = Math.random() * 500;
+        // get dimensions
+        let screen01Height = document.getElementById("screen01").offsetHeight;
+        let screen01Width = document.getElementById("screen01").offsetWidth;
+        for (var node of nodes) {
+          i++;
+          drawLine(node, {
+            x: orix + i,
+            y: -80,
+            width: 1000,
+            time: 2,
+            degrees: 0 + i * 4,
+            //color: `rgb(${i},255,0)`,
+            color: `rgb(${i},${i},${i})`,
+            //color: `black`,
+
+            //color: "white",
+          });
+        }
+
+        //////////
+        i = 0;
+        for (var node of nodes2) {
+          i++;
+          drawLine(node, {
+            x: 700 + i,
+            y: screen01Height + 120,
+            width: 1500,
+            time: 1,
+            degrees: 0 - i * 4.5,
+            //color: `rgb(${i},255,0)`,
+            //color: `rgb(${i},${i},${i})`,
+            color: `black`,
+            //color: "white",
+          });
+        }
+
+        // evento todas las transiciones finito
+        let countEndedTransitions = 0;
+        for (var node of nodes2) {
+          node.addEventListener("transitionend", () => {
+            countEndedTransitions++;
+            if (countEndedTransitions == 40) {
+              enTransition();
+            }
+          });
+        }
+
+        // end or next
+        function enTransition() {
+          const screen = document.getElementById("screen01");
+          screen01.innerHTML = /*html*/ `<div class="screen01_title">
+          <h1 id="screen01_title"><span>&#8595;</span>FullStack Developer <span>&#8595;</span></h1>
+        </div>`;
+
+          for (var node of nodes2) {
+            drawLine(node, {
+              width: 0,
+              time: 1,
+            });
+          }
+          for (var node of nodes) {
+            drawLine(node, {
+              width: 0,
+              time: 1,
+            });
+          }
+        }
+
+        // reactive over countEndedTransitions
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          take01();
+        }, 2000);
+      });
+
+      // show content transition
+      function take02() {
+        // abort transition
+        const transition = document.getElementById("transition01");
+        transition.style.setProperty("display", "none");
+
+        firstScroll = true;
+        console.log("La página se ha desplazado");
+        const screen01 = document.getElementById("screen01");
+        const content = document.getElementById("content");
+        screen01.style.setProperty("height", "1px");
+        content.style.setProperty("top", "1px");
+        content.style.setProperty("visibility", "visible");
+
+        // add transitions to workExperience elements
+        const nodesP = document.querySelectorAll("div.workExperience");
+        let nodesPSeconds = 0;
+        for (var p of nodesP) {
+          nodesPSeconds++;
+          fireTranstion(
+            p,
+            "margin-left",
+            `-${nodesPSeconds * 1400}px`,
+            "0px",
+            1.5
+          );
+        }
+      }
+
+      let firstScroll = undefined;
+      window.addEventListener("wheel", function (event) {
+        // Tu código a ejecutar cuando se desplace la página
+        if (!firstScroll) {
+          take02();
+        }
+      });
+
+      window.addEventListener("touchmove", function () {
+        if (!firstScroll) {
+          take02();
+        }
+      });
+    </script>
+  </body>
+</html>

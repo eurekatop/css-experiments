@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      :root {
+        --width-box-1: 10px;
+        --x-box-1: 0px;
+        --y-box-1: 0px;
+        --color-box-1: #1f991f;
+      }
+      body {
+        background-color: black;
+      }
+      .box1 {
+        border-right: 9px dotted;
+        border-color: var(--color-box-1);
+        width: 0px;
+        transform-origin: top left;
+        margin-bottom: 10px;
+        position: absolute;
+        text-align: center;
+        color: white;
+        background-color: beige;
+        opacity: 1;
+      }
+
+      .centered-div {
+        width: 100%; /* Ajusta el ancho según tus necesidades */
+        height: 100%; /* Ajusta la altura según tus necesidades */
+        background-color: #ccc;
+        text-align: center;
+        line-height: 800px; /* Debes establecerlo igual a la altura del div para centrar verticalmente */
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- div class="box1" style="width: 200px; --x-box-1: 100px; --y: 0px;"></div -->
+    <div class="centered-div">
+      <h1>Mortadelo y Filemon</h1>
+    </div>
+    <script>
+      const nodes = [];
+
+      function getLine(options) {
+        const node = document.createElement("div");
+        node.classList.add("box1");
+        node.style.setProperty("width", 0 + "px");
+        node.style.setProperty("height", 80 + "px");
+        document.body.appendChild(node);
+
+        return node;
+      }
+
+      function drawLine(node, options) {
+        const { x, y, width, time, degrees, color } = options;
+        setTimeout(function () {
+          node.style.setProperty("transition", `width ${time}s`);
+          node.style.setProperty("transform", `rotate(${degrees}deg)`);
+          node.style.setProperty("background-color", color);
+          node.style.setProperty("width", width + "px");
+          node.style.setProperty("top", y + "px");
+          node.style.setProperty("left", x + "px");
+        }, 10);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // get lines
+        let color = 0;
+
+        const nodes = [];
+        for (let i = 0; i < 180; i++, nodes.push(getLine()));
+
+        const nodes2 = [];
+        for (let i = 0; i < 180; i++, nodes2.push(getLine()));
+
+        //////////
+        let i = 0;
+        for (var node of nodes) {
+          i++;
+          drawLine(node, {
+            x: 10 + i,
+            y: 0,
+            width: 1000,
+            time: 2,
+            degrees: 0 + i,
+            //color: `rgb(${i},255,0)`,
+            //color: `rgb(${i},${i},${i})`,
+            color: `black`,
+
+            //color: "white",
+          });
+        }
+
+        //////////
+        i = 0;
+        for (var node of nodes2) {
+          i++;
+          drawLine(node, {
+            x: 1000 + i,
+            y: 1000,
+            width: 1500,
+            time: 1,
+            degrees: 0 - i,
+            //color: `rgb(${i},255,0)`,
+            //color: `rgb(${i},${i},${i})`,
+            color: `black`,
+            //color: "white",
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

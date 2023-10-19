@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <script type="module">
+      import * as shifty from "https://cdnjs.cloudflare.com/ajax/libs/shifty/3.0.3/shifty.js";
+      let { Scene, Tweenable, tween } = {};
+
+      function delay(func, milliseconds) {
+        //setTimeout(() => func(), milliseconds);
+        const _func = (_resolve) => {
+          func();
+          _resolve();
+        };
+        return new Promise((resolve) => {
+          setTimeout(() => _func(resolve), milliseconds);
+        });
+      }
+
+      ////////////////////////////////////////////////////////////////////////
+      /**
+                        _
+        _ __ ___   __ _(_)_ __
+      | '_ ` _ \ / _` | | '_ \
+      | | | | | | (_| | | | | |
+      |_| |_| |_|\__,_|_|_| |_|
+
+      */
+      const mu = {
+        shifty: undefined,
+      };
+
+      async function main() {
+        //mu.shifty.tween({
+        //  from: { x: 0, y: 50 },
+        //  to: { x: 10, y: -30 },
+        //  duration: 1500,
+        //  easing: "easeOutQuad",
+        //  render: (state) => console.log(state),
+        //});
+        //.then(() => console.log("All done!"));
+
+        const divs = document.querySelectorAll("div");
+
+        const tween = (i) =>
+          new mu.shifty.Tweenable({
+            from: { x: 0 },
+            to: { x: 400 },
+            easing: "easeInOutQuad",
+            duration: 1500,
+            step: ({ x }) => {
+              console.log("hijo");
+              divs[i].style.transform = `translateX(${x}px)`;
+            },
+          }).then(() => {});
+
+        tween(0).tween({ to: 2000 });
+
+        //const scene1 = new mu.shifty.Scene(tween(0));
+        console.log(scene1);
+        scene1.resume();
+
+        window.addEventListener("mousemove", async (event) => {
+          const x = event.clientX;
+          const y = event.clientY;
+          const _line = line;
+          DEBUG(`Mouse X: ${x}, Mouse Y: ${y}`);
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        mu.shifty = window.shifty;
+        await main();
+        //codeKeyWordDescriptionsData = await fetchJson(
+        //  "code-key-word-descriptions.json"
+        //);
+        //codeKeyWordsData = await fetchJson("code-key-words.json");
+        //techSkillsDescriptionsData = await fetchJson(
+        //  "tech-skills-descriptions.json"
+        //);
+        //DEBUG("hello");
+      });
+    </script>
+
+    <!-- style motion-->
+    <style>
+      :root {
+        --width-box-1: 10px;
+        --x-box-1: 0px;
+        --y-box-1: 0px;
+        --screen01-width: 100vw;
+        --screen01-height: 80vh;
+
+        --color-line-box-1: #ccd;
+        --color-fill-box-1: white;
+      }
+      html {
+        font-size: 8px; /* TODO MEDIA QUERIE */
+      }
+      body {
+        background-color: black;
+        font-size: 16px;
+        margin: 0px;
+      }
+      .box1 {
+        border-right: 1px solid;
+        border-bottom: 1px solid dashed;
+        border-color: var(--color-line-box-1);
+        width: 0px;
+        height: 1px;
+        transform-origin: top left;
+        margin-bottom: 10px;
+        position: absolute;
+        text-align: center;
+        color: white;
+        background-color: var(--color-fill-box-1);
+        opacity: 1;
+        overflow: hidden;
+        transition-timing-function: linear;
+      }
+
+      .screen01 {
+        width: var(--screen01-width);
+        height: var(--screen01-height);
+        border-bottom: 1px dotted white;
+        background-color: #0f0f0f;
+        text-align: center;
+        line-height: var(--screen01-height);
+        position: absolute;
+        overflow: hidden;
+        transition: height 1s;
+        visibility: block;
+        color: white;
+        /* background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 120%); */
+      }
+
+      .transition01 {
+        width: var(--screen01-width);
+        height: var(--screen01-height);
+        /*border: 10px solid blue;*/
+        color: white;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+
+      .content {
+        color: white;
+        position: relative;
+        top: var(--screen01-height);
+        left: 0px;
+        overflow: visible;
+        transition: top 1s;
+        visibility: hidden;
+      }
+
+      .lipsum {
+        background-color: black;
+        color: white;
+      }
+
+      .screen01_title h1 {
+        font-size: 4rem;
+      }
+
+      @media (max-width: 400px) {
+        .lipsum {
+          font-size: 12px;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          margin-left: 0rem;
+          margin-right: 0rem;
+        }
+      }
+      @media (min-width: 401px) and (max-width: 600px) {
+        .lipsum {
+          font-size: 14px;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          margin-left: 1rem;
+          margin-right: 1rem;
+        }
+      }
+      @media (min-width: 601px) and (max-width: 900px) {
+        .lipsum {
+          font-size: 15px;
+          padding-left: 3rem;
+          padding-right: 3rem;
+          margin-left: 10rem;
+          margin-right: 10rem;
+        }
+      }
+      @media (min-width: 901px) and (max-width: 1800px) {
+        .lipsum {
+          font-size: 17px;
+          padding-left: 5rem;
+          padding-right: 5rem;
+          margin-left: 20rem;
+          margin-right: 20rem;
+        }
+      }
+      @media (min-width: 1801px) {
+        .screen01 {
+          width: 70vw;
+          margin-left: 15vw;
+        }
+        .lipsum {
+          font-size: 18px;
+          padding-left: 10rem;
+          padding-right: 10rem;
+          margin-left: 40rem;
+          margin-right: 40rem;
+
+          /*margin-left: 20%;
+          margin-right: 20%;
+          margin-top: 30px;
+          margin-bottom: 25px;*/
+          max-width: 1000px;
+        }
+      }
+
+      h1 {
+        font-size: 240%;
+      }
+    </style>
+
+    <!-- content -->
+    <link rel="stylesheet" href="b.enjam.ino_panam_stylyng.css" />
+    <!-- end style content -->
+  </head>
+  <body>
+    <div style="background-color: white; color: black; display: none">
+      debug console::::::
+      <pre id="DEBUG"></pre>
+    </div>
+    <!-- header -->
+    <!-- scene area-->
+    <div style="position: relative; top: 0px; left: 0px; overflow: visible">
+      <!-- layer 01-->
+      <div id="screen01" class="screen01">
+        AAAAAAAAAA
+        <div id="screen01_title" class="screen01_title">
+          <h1>Mortadelo y Filemon</h1>
+        </div>
+      </div>
+      <!-- transition01 -->
+      <div style="position: relative; top: 0px; left: 0px; overflow: visible">
+        <!-- layer 02-->
+        <div
+          id="transition01"
+          class="transition01"
+          style="overflow: hidden"
+        ></div>
+      </div>
+    </div>
+
+    <div id="content" class="content">
+      <!-- CV main content-->
+      <div id="lipsum" class="lipsum"></div>
+    </div>
+  </body>
+</html>
