@@ -1,9 +1,17 @@
-import {tween} from 'shifty'
+import shifty from 'shifty'
 
-tween({
+const { tween } = shifty;
+
+export function test(node:HTMLElement) {
+  tween({
     from: { x: 0, y: 50 },
     to: { x: 10, y: -30 },
     duration: 1500,
     easing: 'easeOutQuad',
-    render: state => console.log(state),
+    render: state => {
+      console.log(state)
+      console.log ( node )
+      node.innerHTML = state.x + ""
+    },
   });
+}

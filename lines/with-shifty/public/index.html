@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <!-- link rel="stylesheet" type="text/css" href="styles.css" -->
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <!-- script src="../dist/bundle.js"></script -->
+  <script type="module">
+    import { test } from "../dist/bundle.js"
+    document.addEventListener("DOMContentLoaded", async () => {
+      var node = document.getElementById("tween");
+      test(node);
+    });
+  </script>
 </head>
+
 <body>
-  <script src="../node_modules/shifty/dist/index.js"></script>
-  <script src="../dist/index.js"></script>
+  <div id="app">
+    <div id="tween">A</div>
+  </div>
 </body>
+
 </html>
