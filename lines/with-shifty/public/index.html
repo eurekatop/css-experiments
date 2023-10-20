@@ -5,17 +5,68 @@
   <link rel="stylesheet" type="text/css" href="index.css">
   <!-- script src="../dist/bundle.js"></script -->
   <script type="module">
-    import { test } from "../dist/bundle.js"
+    import { test, parseAsciiArt, fetchJson } from "../dist/bundle.js"
+
+    let count = 1
+    let oriSourceX = 0;
+    let oriSourceY = 0;
+    function main(coordinates) {
+
+      const appEl = document.getElementById("app");
+      const x = coordinates[0] * 9 + 100;
+      const y = coordinates[1] * 9 + 100;
+      const char = coordinates[2]
+
+      const divElement = document.createElement("div");
+      const color = `rgb(${Math.random() * 255 % 20},${Math.random() * 255 % 100},255)`
+      divElement.classList.add("tween");
+      divElement.innerText = char
+      divElement.style.top = `${oriSourceY}px`
+      divElement.style.left = `${oriSourceX}px`
+      divElement.style.color = color;
+      appEl.appendChild(divElement)
+
+      test(divElement, { x: oriSourceX, y: oriSourceY }, { x: x, y: y }, 100);
+
+      //const destElement = document.createElement("div");
+      //destElement.classList.add("dest");
+      //destElement.style.top = `${y}px`
+      //destElement.style.left = `${x}px`
+      //destElement.innerText = char
+      //appEl.appendChild(destElement)
+
+    }
+
+    window.addEventListener("mousemove", function (event) {
+      oriSourceX = event.clientX;
+      oriSourceY = event.clientY + window.scrollY;
+    });
+
     document.addEventListener("DOMContentLoaded", async () => {
-      var node = document.getElementById("tween");
-      test(node);
+      const asciiArt = await fetchJson('ascii-art.txt')
+
+
+      const result = parseAsciiArt(asciiArt);
+      const numPoints = result.length;
+      let loop = 0;
+
+      setInterval(() => {
+        // batch 
+        for (let i = 0; i < 25; i++) {
+          if (loop > numPoints * 1)
+            return;
+          const coordinates = result[loop++ % numPoints]
+          main(coordinates)
+
+        }
+      }, 100)
     });
   </script>
 </head>
 
 <body>
   <div id="app">
-    <div id="tween">A</div>
+    <div class="box1"></div>
   </div>
 </body>
 

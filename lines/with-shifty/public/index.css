@@ -1,3 +1,37 @@
-div {
+body {
+    background-color: black;
+    min-height: 7000px;
+}
+
+div.tween {
+    color: white;
+    font-family: monospace;
+    font-size: 10px;
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    /*border: 1px solid white;*/
+    /*background-color: black;*/
+    transition: top 60ms linear, left 60ms linear;
+}
+
+div.dest {
+    position: absolute;
+    color: white;
+    top: 0px;
+    left: 0px;
+    height: 12px;
+    width: 12px;
+    /*border: 1px solid white*/
+    /*background-color: cyan;*/
+}
+
+
+.box1 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
     border: 1px solid black;
+    width: 100px;
+    height: 100px;
 }

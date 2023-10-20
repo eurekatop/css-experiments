@@ -1,3 +1,35 @@
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise, SuppressedError, Symbol */
+
+
+function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+    var e = new Error(message);
+    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};
+
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function unwrapExports (x) {
@@ -1671,18 +1703,46 @@ exports.isEasingKey = isEasingKey;
 var shifty = unwrapExports(shifty_node);
 
 const { tween } = shifty;
-function test(node) {
-    tween({
-        from: { x: 0, y: 50 },
-        to: { x: 10, y: -30 },
-        duration: 1500,
+function fetchJson(url) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch(url);
+            if (!response.ok) {
+                throw new Error("No se pudo cargar el archivo JSON.");
+            }
+            const data = yield response.text();
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+    });
+}
+function parseAsciiArt(asciiArt) {
+    const lines = asciiArt.split('\n');
+    const coordinates = [];
+    for (let y = 0; y < lines.length; y++) {
+        const line = lines[y];
+        for (let x = 0; x < line.length; x++) {
+            const char = line.charAt(x);
+            if (char !== ' ' && char !== '\n') {
+                coordinates.push([x, y, char]);
+            }
+        }
+    }
+    return coordinates;
+}
+function test(node, from, to, duration) {
+    return tween({
+        from: from,
+        to: to,
+        duration: duration,
         easing: 'easeOutQuad',
-        render: state => {
-            console.log(state);
-            console.log(node);
-            node.innerHTML = state.x + "";
+        render: (state) => {
+            node.style.top = `${(+state.y)}px`;
+            node.style.left = `${(+state.x)}px`;
         },
     });
 }
 
-export { test };
+export { fetchJson, parseAsciiArt, test };
