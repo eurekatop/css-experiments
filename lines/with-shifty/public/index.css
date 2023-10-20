@@ -12,7 +12,7 @@ div.tween {
     width: 10px;
     /*border: 1px solid white;*/
     /*background-color: black;*/
-    transition: top 60ms linear, left 60ms linear;
+    transition: top 600ms linear, left 600ms linear;
 }
 
 div.dest {

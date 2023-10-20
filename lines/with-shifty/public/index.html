@@ -13,12 +13,12 @@
     function main(coordinates) {
 
       const appEl = document.getElementById("app");
-      const x = coordinates[0] * 9 + 100;
-      const y = coordinates[1] * 9 + 100;
+      const x = coordinates[0] * 10 + 100;
+      const y = coordinates[1] * 12 + 100;
       const char = coordinates[2]
 
       const divElement = document.createElement("div");
-      const color = `rgb(${Math.random() * 255 % 20},${Math.random() * 255 % 100},255)`
+      const color = `rgb(${Math.random() * 300 % 120},120,120)`
       divElement.classList.add("tween");
       divElement.innerText = char
       divElement.style.top = `${oriSourceY}px`
@@ -26,7 +26,7 @@
       divElement.style.color = color;
       appEl.appendChild(divElement)
 
-      test(divElement, { x: oriSourceX, y: oriSourceY }, { x: x, y: y }, 100);
+      test(divElement, { x: oriSourceX, y: oriSourceY }, { x: x, y: y }, 800);
 
       //const destElement = document.createElement("div");
       //destElement.classList.add("dest");
@@ -52,14 +52,14 @@
 
       setInterval(() => {
         // batch 
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 5; i++) {
           if (loop > numPoints * 1)
             return;
           const coordinates = result[loop++ % numPoints]
           main(coordinates)
 
         }
-      }, 100)
+      }, 300 / 5)
     });
   </script>
 </head>
