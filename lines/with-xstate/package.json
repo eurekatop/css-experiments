@@ -1,0 +1,9 @@
+{
+  "type":"module",
+  "dependencies": {
+    "xstate": "^4.36.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3"
+  }
+}

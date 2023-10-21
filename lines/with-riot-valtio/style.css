@@ -1,0 +1,52 @@
+@import 'node_modules/@picocss/pico/css/pico.css';
+:root {
+  --all-border: solid 1px cyan;
+  --primary-background-color: black;
+  --primary-text-color: #a0e0e2;
+
+  /* pico.css */
+  --font-size: 1rem;
+  --primary: #4a4a4a;
+  --primary-hover: hsl(10, 20%, 2%);
+  --primary-focus: white;
+  --primary-inverse: #bbbbbb;
+  --secondary: hsl(205, 15%, 41%);
+  --secondary-hover: hsl(205, 20%, 32%);
+  --secondary-focus: rgba(89, 107, 120, 0.125);
+  --secondary-inverse: #fff;
+  --border-width: 1px;
+  --spacing: 1.5rem;
+  --transition: 220ms;
+  --h1-color: #aaaaaa;
+}
+/*
+body {
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+}
+*/
+
+.container {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin: auto;
+  /*min-height: 100vh;*/
+  border: var(--all-border);
+}
+
+@media (min-width: 500px) {
+  .my-grid {
+    grid-template-columns: 50 vw 50 vw;
+  }
+}
+@media (min-width: 992px) {
+  .my-grid {
+    grid-template-columns: 50 vw 50 vw;
+  }
+}
+@media (min-width: 1200px) {
+  .my-grid {
+    grid-template-columns: 28vw 68vw;
+  }
+}

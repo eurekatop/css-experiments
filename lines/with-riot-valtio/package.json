@@ -1,0 +1,51 @@
+{
+  "type": "module",
+  "name": "with-riot",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "test": "nyc --require esm --require jsdom-global/register --require @riotjs/register mocha src/**/*.spec.js",
+    "cov": "nyc report --reporter=text-lcov",
+    "cov-html": "nyc report --reporter=html",
+    "build": "rollup -c",
+    "prepublishOnly": "npm test",
+    "start": "npm run dev & npm run server",
+    "watch": "rollup -c -w 'src/**'",
+    "server": "browser-sync start --files 'dist/*, style.css, index.html' --server",
+    "dev": "tsc --watch & rollup -c -w",
+    "format": "prettier --write \"**/*.{ts,riot}\""
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@riotjs/compiler": "^6.3.2",
+    "@riotjs/register": "^6.0.1",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@types/chai": "^4.3.9",
+    "@types/mocha": "^10.0.3",
+    "browser-sync": "^2.27.10",
+    "chai": "^4.3.6",
+    "esm": "^3.2.25",
+    "jsdom": "^20.0.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "prettier": "^2.8.8",
+    "riot": "^9.1.1",
+    "rollup": "^4.1.4",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-css-bundle": "^1.0.4",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-riot": "^6.0.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@picocss/pico": "^1.5.10",
+    "riot": "^7.0.3",
+    "valtio": "^1.11.2"
+  }
+}

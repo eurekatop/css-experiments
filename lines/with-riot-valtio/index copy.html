@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>My Riot App</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <!-- link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.0/milligram.css" -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <my-web-component></my-web-component>
+
+    <div class="grid my-grid">
+      <div class="container__" style="margin-left: 10px; min-width: 370px">
+        <div class="row">
+          <hgroup>
+            <h2>Eurekatop</h2>
+            <h3>Css Experiments</h3>
+          </hgroup>
+          <p>El formulario con las opciones</p>
+          <div is="my-window" data-riot-component></div>
+
+          <main class="column column-60">
+            <h1>Hello that's my firs__t Riot.js App</h1>
+
+            <div
+              is="my-component"
+              data-riot-component
+              message="Hello There"
+            ></div>
+          </main>
+          <aside is="sidebar" data-riot-component class="column"></aside>
+        </div>
+      </div>
+      <div>
+        <h1>ASCII ART LINES</h1>
+        <nav>
+          <ul>
+            <li><a href="#" role="button" class="outline">Primary</a></li>
+            <li>
+              <a href="#" role="button" class="secondary outline">Secondary</a>
+            </li>
+            <li>
+              <a href="#" role="button" class="contrast outline">Contrast</a>
+            </li>
+          </ul>
+        </nav>
+        <div
+          class="container-fluid"
+          style="min-height: 90%; border: 1px solid white"
+        >
+          <iframe src="https://www.meneame.net"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class=".container-fluid"></div>
+
+    <script defer src="dist/bundle.js"></script>
+  </body>
+</html>
