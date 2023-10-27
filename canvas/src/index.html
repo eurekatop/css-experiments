@@ -8,21 +8,50 @@
   <script>
   </script>
   <style>
-    .div {
-      max-width: 1960px; /* Set your maximum width in pixels */
-      max-height: 600px; /* Set your maximum height in pixels */
+    body {
+      display: flex;
+      flex-direction: row;
     }
-  #c01 {
-    border: 2px solid white;
-  }
+
+    .left-container {
+      display: flex;
+      border:10px dashed white;
+      width: 1000px;
+      height: 1000px;
+
+      .left-container__canvas {
+        border: 10px solid cyan;
+      }
+    }
+
+    .right-container {
+      display: flex;
+      border:10px dotted white;
+      max-width: 1960px; /* Set your maximum width in pixels */
+      max-height: 3900px; /* Set your maximum height in pixels */
+
+      .__tiles-resume{
+          color: red;
+      }
+    }
+
+
+
 
 </style>
 </head>
 
 <body>
-  <div>
-    <canvas width="2900px" height="3900px" id="c01"></canvas>
+  <div class="left-container">
+    <canvas width="1000px" height="1000px" class=".left-container__canvas" id="c01"></canvas>
   </div>
+
+  <div id="d01" class="right-container">
+    <div class="right-container __tiles-resume" >
+      <my-tile src="/kenney_isometric-roads/png/crossroadNEW.png"></my-tile>
+    </div>
+  </div>
+
 </body>
 
 </html>
