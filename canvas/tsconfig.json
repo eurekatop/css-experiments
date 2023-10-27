@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+      "target": "ES2022",
+      "module": "ES2022",
+      "strict": true,
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "./dist/esm",     // Output directory for compiled files
+      "rootDir": "./src",     // Root directory of your source code
+      "moduleResolution": "node",
+      "lib": ["es2015", "dom"], // Libraries available in your project   
+      "resolveJsonModule": true
+    },
+    "include": [
+      "src/**/*.ts"  // Include TypeScript files in the 'src' directory
+, "types/index.d.ts"    ],
+    //"exclude": [
+    //  "node_modules"  // Exclude the 'node_modules' directory
+    //]
+  }
+
+/*
+  "target": "ES5",    // Target ECMAScript 2015 (or later) for Promises support
+  "module": "commonjs",  // Specify the module system you're using (e.g., CommonJS)
+  "strict": true,        // Enable strict type checking
+  "esModuleInterop": true, // Enable interoperability between CommonJS and ES modules
+  "forceConsistentCasingInFileNames": true, // Enforce consistent file name casing
+  "skipLibCheck": true,  // Skip type checking of declaration files
+  "removeComments": true, // Remove comments from the compiled JavaScript
+  "sourceMap": true,     // Generate source maps for debugging
+
+
+  "strictNullChecks": true, // Enable strict null checks
+  "noImplicitAny": true,    // Avoid the 'any' type where possible
+  "noImplicitThis": true,   // Ensure 'this' is properly typed
+  "alwaysStrict": true,     // Enable strict mode,
+  "moduleResolution": "node",
+  //"typeRoots": ["./types"],
+  "allowSyntheticDefaultImports":true
+*/

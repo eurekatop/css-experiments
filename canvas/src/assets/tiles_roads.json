@@ -1,0 +1,387 @@
+[
+    {
+      "id": 1,
+      "file": "beach.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "left": [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "down": [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "right": [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+      }
+    },
+    {
+      "id": 2,
+      "file": "bridgeEW.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "left": [4,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "down": [9,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "right": [3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+      }
+    },
+    {
+      "id": 3,
+      "file": "bridgeNS.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "left": [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "down": [4,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "right": [5,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+      }
+    },
+    {
+      "id": 4,
+      "file": "crossroadESW.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "left": [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "down": [4,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "right": [5,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+      }
+    },
+    {
+      "id": 5,
+      "file": "crossroadNES.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "left": [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "down": [4,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "right": [5,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+      }
+    },
+    {
+      "id": 6,
+      "file": "crossroadNEW.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [],
+        "left": [5],
+        "down": [7],
+        "right": [8]
+      }
+    },
+    {
+      "id": 7,
+      "file": "crossroadNSW.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [6],
+        "left": [],
+        "down": [8],
+        "right": [8]
+      }
+    },
+    {
+      "id": 8,
+      "file": "crossroad.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [7],
+        "left": [],
+        "down": [],
+        "right": [9]
+      }
+    },
+    {
+      "id": 9,
+      "file": "dirtDouble.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [8],
+        "left": [],
+        "down": [10],
+        "right": [11]
+      }
+    },
+    {
+      "id": 10,
+      "file": "endE.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [9],
+        "left": [],
+        "down": [],
+        "right": [11]
+      }
+    },
+    {
+      "id": 11,
+      "file": "endN.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [],
+        "left": [10],
+        "down": [12],
+        "right": [12]
+      }
+    },
+    {
+      "id": 12,
+      "file": "endS.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [11],
+        "left": [],
+        "down": [13],
+        "right": [13]
+      }
+    },
+    {
+      "id": 13,
+      "file": "endW.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [12],
+        "left": [],
+        "down": [14],
+        "right": [14]
+      }
+    },
+    {
+      "id": 14,
+      "file": "exitE.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [13],
+        "left": [],
+        "down": [15],
+        "right": [15]
+      }
+    },
+    {
+      "id": 15,
+      "file": "exitN.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [],
+        "left": [14],
+        "down": [16],
+        "right": [16]
+      }
+    },
+    {
+      "id": 16,
+      "file": "exitS.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [15],
+        "left": [],
+        "down": [17],
+        "right": [17]
+      }
+    },
+    {
+      "id": 17,
+      "file": "exitW.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [16],
+        "left": [],
+        "down": [18],
+        "right": [18]
+      }
+    },
+    {
+      "id": 18,
+      "file": "lotE.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [17],
+        "left": [],
+        "down": [19],
+        "right": [19]
+      }
+    },
+    {
+      "id": 19,
+      "file": "lotES.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [18],
+        "left": [],
+        "down": [20],
+        "right": [20]
+      }
+    },
+    {
+      "id": 20,
+      "file": "lotNE.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [19],
+        "left": [],
+        "down": [21],
+        "right": [21]
+      }
+    },
+    {
+      "id": 21,
+      "file": "lotN.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [20],
+        "left": [],
+        "down": [22],
+        "right": [22]
+      }
+    },
+    {
+      "id": 22,
+      "file": "lotNW.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [21],
+        "left": [],
+        "down": [23],
+        "right": [23]
+      }
+    },
+    {
+      "id": 23,
+      "file": "lotS.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [22],
+        "left": [],
+        "down": [24],
+        "right": [24]
+      }
+    },
+    {
+      "id": 24,
+      "file": "lotSW.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [23],
+        "left": [],
+        "down": [25],
+        "right": [25]
+      }
+    },
+    {
+      "id": 25,
+      "file": "lotW.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [24],
+        "left": [],
+        "down": [26],
+        "right": [26]
+      }
+    },
+    {
+      "id": 26,
+      "file": "roadES.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [27],
+        "left": [],
+        "down": [28],
+        "right": [25]
+      }
+    },
+    {
+      "id": 27,
+      "file": "roadEW.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [],
+        "left": [],
+        "down": [],
+        "right": [26]
+      }
+    },
+    {
+      "id": 28,
+      "file": "roadNE.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [29],
+        "left": [],
+        "down": [30],
+        "right": [26]
+      }
+    },
+    {
+      "id": 29,
+      "file": "roadNS.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [28],
+        "left": [],
+        "down": [],
+        "right": [30]
+      }
+    },
+    {
+      "id": 30,
+      "file": "roadNW.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [31],
+        "left": [],
+        "down": [32],
+        "right": [28]
+      }
+    },
+    {
+      "id": 31,
+      "file": "road.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [],
+        "left": [],
+        "down": [],
+        "right": [30]
+      }
+    },
+    {
+      "id": 32,
+      "file": "roadSW.png",
+      "type": "road",
+      "sub-type": "one",
+      "related": {
+        "top": [],
+        "left": [],
+        "down": [],
+        "right": [30]
+      }
+    }
+  ]
+  
