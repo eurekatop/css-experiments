@@ -1,57 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" type="text/css" href="index.css">
-  <script>
-  </script>
-  <style>
-    body {
-      display: flex;
-      flex-direction: row;
-    }
-
-    .left-container {
-      display: flex;
-      border:10px dashed white;
-      width: 1000px;
-      height: 1000px;
-
-      .left-container__canvas {
-        border: 10px solid cyan;
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <script></script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: row;
       }
-    }
 
-    .right-container {
-      display: flex;
-      border:10px dotted white;
-      max-width: 1960px; /* Set your maximum width in pixels */
-      max-height: 3900px; /* Set your maximum height in pixels */
+      .left-container {
+        display: flex;
+        border: 10px dashed white;
+        width: 1000px;
+        height: 1000px;
 
-      .__tiles-resume{
+        .left-container__canvas {
+          border: 10px solid cyan;
+        }
+      }
+
+      .right-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        border: 10px dotted white;
+        width: 100%; /* Set your maximum width in pixels */
+        height: 100%; /* Set your maximum height in pixels */
+
+        .__tiles-resume {
           color: red;
+        }
       }
-    }
 
+      my-tile {
+        display: flex;
+        border: 1px solid red;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 127px;
+      }
+    </style>
+  </head>
 
-
-
-</style>
-</head>
-
-<body>
-  <div class="left-container">
-    <canvas width="1000px" height="1000px" class=".left-container__canvas" id="c01"></canvas>
-  </div>
-
-  <div id="d01" class="right-container">
-    <div class="right-container __tiles-resume" >
-      <my-tile src="/kenney_isometric-roads/png/crossroadNEW.png"></my-tile>
+  <body>
+    <div class="left-container">
+      <canvas
+        width="1000px"
+        height="1000px"
+        class=".left-container__canvas"
+        id="c01"
+      ></canvas>
     </div>
-  </div>
 
-</body>
+    <div id="d01" class="right-container">
+    <div id="d01_tiles" class="right-container __tiles-resume"></div>
 
+    <div id="test"></div>
+    </div>
+  </body>
 </html>

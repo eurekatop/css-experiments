@@ -19,6 +19,7 @@ export class MyTile extends HTMLElement {
         </style>
         <div class="container">
           <img src="${this.getAttribute('src')}" alt="Image">
+          <p>${this.getAttribute('title')}</p>
         </div>
       `;
     }

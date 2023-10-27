@@ -3,7 +3,7 @@
 import axios from "axios";
 import tilesData from "./assets/tiles_roads.json";
 import { type Tile } from "./models/tile.interface";
-import { stringStore } from "./store/app-store";
+import { appStore } from "./store/app-store";
 
 const tileDefWidth: number = 100;
 const tileDefHeight: number = 58;
@@ -176,14 +176,17 @@ export async function main() {
   //console.log ( stringStore.data$('HELLO'))
   // MAIN
   const _tiles = await loadTilesFromJson(tilesData);
+  appStore.tileStore.set('TILES', _tiles)
 
   const canvas = document?.getElementById("c01") as HTMLCanvasElement;
   const ctx = canvas.getContext("2d");
   if (ctx) {
     drawTiles(_tiles, ctx);
 
+    let counter = 0;
     setInterval(() => {
       //drawTiles(_tiles, ctx);
+      //appStore.stringStore.set('HELLO', `and ${counter++}`)
     }, 500);
   }
 }
