@@ -1,24 +1,21 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="sl-theme-dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+
     <link rel="stylesheet" type="text/css" href="index.css" />
-    <script></script>
+
     <style>
-      body {
-        display: flex;
-        flex-direction: row;
-      }
 
       .left-container {
         display: flex;
-        border: 10px dashed white;
+        border: 1px dashed white;
         width: 1000px;
         height: 1000px;
 
         .left-container__canvas {
-          border: 10px solid cyan;
+          border: 1px solid cyan;
         }
       }
 
@@ -26,23 +23,11 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        border: 10px dotted white;
+        border: 1px dotted white;
         width: 100%; /* Set your maximum width in pixels */
         height: 100%; /* Set your maximum height in pixels */
-
-        .__tiles-resume {
-          color: red;
-        }
       }
 
-      my-tile {
-        display: flex;
-        border: 1px solid red;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        flex-direction: column;
-        width: 127px;
-      }
     </style>
   </head>
 
@@ -56,10 +41,11 @@
       ></canvas>
     </div>
 
-    <div id="d01" class="right-container">
-    <div id="d01_tiles" class="right-container __tiles-resume"></div>
 
-    <div id="test"></div>
+    <!-- page/component editor -->
+    <my-element></my-element>
+    <div id="app_editor" id="d01" class="right-container">
+      <div id="d01_tiles" class="right-container __tiles-resume">
+      </div>
     </div>
-  </body>
 </html>

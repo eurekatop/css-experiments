@@ -9,11 +9,13 @@
       "rootDir": "./src",     // Root directory of your source code
       "moduleResolution": "node",
       "lib": ["es2015", "dom"], // Libraries available in your project   
-      "resolveJsonModule": true
+      "resolveJsonModule": true,
+      "experimentalDecorators": true,    // lit-elements requeriment
+      "useDefineForClassFields": false   // lit-elements requeriment
     },
     "include": [
       "src/**/*.ts"  // Include TypeScript files in the 'src' directory
-, "types/index.d.ts"    ],
+      ,"types/index.d.ts"    ],
     //"exclude": [
     //  "node_modules"  // Exclude the 'node_modules' directory
     //]

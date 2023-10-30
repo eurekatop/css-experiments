@@ -20,6 +20,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      'lit-html/lib/shady-render.js': path.resolve(__dirname, './node_modules/lit-html/lit-html.js')
+    }
   },
   output: {
     filename: 'bundle.js',
@@ -31,7 +34,7 @@ module.exports = {
         template: 'src/index.html' }),
         new CopyPlugin({
           patterns: [
-              { from: "src/public", to: "" } //to the dist root directory
+              { from: "src/public", to: "" }, //to the dist root directory
           ],
       }),
   ],
