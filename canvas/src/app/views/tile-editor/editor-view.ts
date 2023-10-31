@@ -25,12 +25,17 @@ function template(data: { tiles?: Tile[] } = {}): HTMLTemplateResult {
       ></my-tile>`
   );
 
-  return html`<div id="d01_tiles" class="right-container __tiles-resume">
+  return html`
+  <div><button @click="${handleGenerateTileMap}">Generate TileMap</button></div>
+  <div id="d01_tiles" class="right-container __tiles-resume">
     <h1>Tile Editor</h1>
     ${tiles}
   </div>`;
 }
 
+function handleGenerateTileMap(){
+  alert("fds")
+}
 
 function handleActionDelete(event:CustomEvent) {
   const data:MyTileEventData = event.detail.data

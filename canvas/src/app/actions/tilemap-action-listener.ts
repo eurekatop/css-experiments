@@ -34,10 +34,14 @@ function tileMapService (state:TileMapState) {
             const tile = tiles.find ( x => x.id == data.tileId)
             if ( tile !== undefined ) {
                 tile.related = {
-                    top:   [1],
-                    left:  [1],
-                    down:  [1],
-                    right: [1]
+                    north:   [1],
+                    northEast: [1],
+                    east:  [1],
+                    southEast: [1],
+                    south:  [1],
+                    southWest: [1],
+                    west: [1],
+                    northWest: [1]
                 }
             }
             console.log ( _newState )

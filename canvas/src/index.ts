@@ -1,12 +1,14 @@
-import {main as mainIsometric} from './app/isometric-map'
+import {main as mainIsometric} from './app/views/isometric-map/isometric-map.view'
 import { main as mainEditor} from './app/views/tile-editor/editor-view'
-import { appStore } from './app/store/app-store'
+import { InputDevicesState, appStore } from './app/store/app-store'
 import { MyElement } from './core/ui-components/my-element';
 import { MyTile } from './app/app-components/my-tile'
 import { IsometricMapActionListener } from './app/actions/isometric-map-action-listener';
 import { actionFactory as isometricActionFactory} from './app/actions/isometric-map-actions';
+import { actionFactory as inputDevicesAction} from './app/actions/input-devices-actions';
 import { TileMapActionListener, tileMapActionListener } from './app/actions/tilemap-action-listener';
 import { actionFactory as tileMapActionFactory} from './app/actions/tilemap-actions';
+import { isometricMapActionListener } from './app/actions/input-devices-actions-listener';
 //import { TileMapActionListener } from './app/actions/tilemap-action-listener';
 
 document.addEventListener("DOMContentLoaded", async (event) => {
@@ -32,6 +34,19 @@ document.addEventListener("DOMContentLoaded", async (event) => {
   mainEditor()
   mainIsometric ()
 
+  // main loop events keboard
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') {
+      isometricMapActionListener.dispatch ( inputDevicesAction ("keyboard_move_left", {offset:1}))
+    } else if (event.key === 'ArrowRight') {
+      isometricMapActionListener.dispatch ( inputDevicesAction ("keyboard_move_right", {offset:1}))
+    } else if (event.key === 'ArrowUp') {
+      isometricMapActionListener.dispatch ( inputDevicesAction ("keyboard_move_up", {offset:1}))
+    } else if (event.key === 'ArrowDown') {
+      isometricMapActionListener.dispatch ( inputDevicesAction ("keyboard_move_down", {offset:1}))
+    }
+  });
 
 
 
@@ -58,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
   })
 
   isometricMapActionListener.subscribeToState(2000).subscribe ( (value) => {
-    console.log(value)
+    console.log(value)tileStore
   })
 
 

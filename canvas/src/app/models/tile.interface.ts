@@ -4,10 +4,14 @@ export interface Tile {
     type: string;
     subType: string;
     related: {
-        top: number[];
-        left: number[];
-        down: number[];
-        right: number[];
+        north: number[];
+        northEast: number[];
+        east: number[];
+        southEast: number[];
+        south: number[];
+        southWest: number[];
+        west: number[];
+        northWest:number[];
     };
     image?: HTMLImageElement;
 }

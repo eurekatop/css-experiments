@@ -25,13 +25,10 @@ export class CoreStore<T> {
 
     const subject = this.dataSubjects[key];
     
-    //if (subject) {
       const value = await firstValueFrom(subject);
       return value;
-    //} else {
-    //  return undefined;
-    //}
   }
+  
   getObservable(key:string): Observable<T> {
     if ( this.dataSubjects[key] === undefined ) {
       throw new Error(`${key} undefined`)
