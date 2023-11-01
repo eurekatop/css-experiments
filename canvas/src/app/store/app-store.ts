@@ -37,7 +37,9 @@ export const inputDevicesState: InputDevicesState = {
 
 class AppStore {
   stringStore = new CoreStore<string>();
-  tileStore = new CoreStore<Tile[]>();
+
+  //tileStore = new CoreStore<Tile[]>();
+
   actionsStore = new CoreStore<string>();
 
   tileMapStore = new CoreStore<TileMapState>();
@@ -47,7 +49,7 @@ class AppStore {
 
   constructor() {
     //TODO: set initial states in ANOTHER PLACE
-    this.tileStore.set('TILES', []);
+    //this.tileStore.set('TILES', []);
     this.tileMapStore.set('TILES', tileMapState);
     this.inputDevicesStore.set('DEVICE', inputDevicesState);
 

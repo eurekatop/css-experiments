@@ -10,10 +10,21 @@ import { Observable, ReplaySubject, distinctUntilChanged, firstValueFrom, map } 
  */
 export class CoreStore<T> {
   protected dataSubjects: { [index: string]: ReplaySubject<T> } = {};
+  protected dataPropSubjects: { [index: string]: { [P in keyof T]: ReplaySubject<T[P]> } } = {};
 
   private _createSubject(key: string) {
     if (this.dataSubjects[key] === undefined) {
       this.dataSubjects[key] = new ReplaySubject<T>(0);
+    }
+  }
+
+  private _createPropSubject<K extends keyof T>(key: string, prop: K) {
+    if (this.dataPropSubjects[key] === undefined) {
+      this.dataPropSubjects[key] = {} as { [P in keyof T]: ReplaySubject<T[P]> };
+    }
+
+    if (this.dataPropSubjects[key][prop] === undefined) {
+      this.dataPropSubjects[key][prop] = new ReplaySubject<T[K]>(0);
     }
   }
 
@@ -52,12 +63,15 @@ export class CoreStore<T> {
     if (this.dataSubjects[key] === undefined) {
       throw new Error(`Data item with key '${key}' is undefined`);
     }
+    this._createPropSubject(key, prop);
 
-    const subject = await firstValueFrom(this.dataSubjects[key]);
-    const currentState: T = { ...subject };
-    currentState[prop] = value;
+    const state: T = await firstValueFrom(this.dataSubjects[key]);
 
-    this.dataSubjects[key].next(currentState);
+    let propState: T[K] = { ...state[prop] };
+
+    propState = value;
+
+    this.dataPropSubjects[key][prop].next(propState);
   }
 
   /**
@@ -115,10 +129,11 @@ export class CoreStore<T> {
    * @throws {Error} If the 'key' does not exist in the data store.
    */
   observeProp<K extends keyof T>(key: string, prop: K): Observable<T[K]> {
-    if (this.dataSubjects[key] === undefined) {
+    if (this.dataPropSubjects[key][prop] === undefined) {
       throw new Error(`Data item with key '${key}' is undefined when accessing ${String(prop)}`);
     }
 
-    return this.dataSubjects[key].pipe(map((state) => state[prop]));
+    return this.dataPropSubjects[key][prop];
+    //return this.dataSubjects[key]   .pipe(map((state) => state[prop]));
   }
 }
