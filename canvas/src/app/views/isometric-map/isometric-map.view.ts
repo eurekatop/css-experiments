@@ -1,12 +1,11 @@
-//import sisku from "./images/bigPreview.png"
-//import { Axios } from "axios";
-import axios from "axios";
-import tilesData from "../../../assets/tiles_roads.json";
-import { type Tile } from "../../models/tile.interface";
-import { InputDevicesState, appStore } from "../../store/app-store";
-import { actionFactory } from "../../actions/tilemap-actions";
-import { tileMapActionListener } from "../../actions/tilemap-action-listener";
-import { iterateLeftToRightByRows, iterateLeftToRightZigZag } from "../../../core/utils/matrix-iterators";
+import { type Tile } from '../../models/tile.interface';
+import { InputDevicesState, TileMapState, appStore, tileMapState } from '../../store/app-store';
+import { actionFactory } from '../../actions/tilemap-actions';
+import { tileMapActionListener } from '../../actions/tilemap-action-listener';
+import {
+  iterateLeftToRightByRows,
+  iterateLeftToRightZigZag,
+} from '../../../core/utils/matrix-iterators';
 
 const tileDefWidth: number = 100;
 const tileDefHeight: number = 58;
@@ -15,8 +14,9 @@ const tileDefHeightOffesetY: number = 4;
 /*
   Pointer to IDs of tiles, representing the map world.
 */
-export type TileMapId = number[][] 
+export type TileMapId = number[][];
 
+class IsometricMapView {}
 
 function innerJoin(arrays: (number[] | undefined)[]): number[] {
   const definedArrays = arrays.filter((arr) => arr !== undefined) as number[][];
@@ -44,12 +44,7 @@ function getRandomElement(arr: number[]): number | undefined {
 
 // ..
 
-function drawPoint(
-  ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  color: string
-) {
+function drawPoint(ctx: CanvasRenderingContext2D, x: number, y: number, color: string) {
   const pointColor = color;
   const pointSize = 2;
 
@@ -62,180 +57,142 @@ function drawPoint(
 
 function clearCanvas(ctx: CanvasRenderingContext2D) {
   const canvas = ctx.canvas;
-  ctx.clearRect(0, 0, canvas.width, canvas.height); 
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-
-
-
-function debugGenerateMap( cols:number, rows:number, tileMapId:TileMapId) {
-  const map = tileMapId.map ( (x) => (x).map ( y => y.toString().padStart(2,'0')).join(' ') ).join('\n')
-  console.log ( tileMapId )
-  console.log ( map )
-  
+function debugGenerateMap(cols: number, rows: number, tileMapId: TileMapId) {
+  const map = tileMapId
+    .map((x) => x.map((y) => y.toString().padStart(2, '0')).join(' '))
+    .join('\n');
+  console.log(tileMapId);
+  console.log(map);
 }
-function delay(ms:number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function calculateTileForCell(x:number, y:number, cols:number, rows:number, tileMapId:TileMapId, tiles:Tile[]) {
-   if (x > 0 && y > 0 && x < cols - 1 && y < rows - 1) {
-     let currentTileId: number = tileMapId[y][x];
+function calculateTileForCell(
+  x: number,
+  y: number,
+  cols: number,
+  rows: number,
+  tileMapId: TileMapId,
+  tiles: Tile[],
+) {
+  if (x > 0 && y > 0 && x < cols - 1 && y < rows - 1) {
+    let currentTileId: number = tileMapId[y][x];
 
-     if ( x == 3 && y == 3) {
-       alert (1)
-     }
+    if (x == 3 && y == 3) {
+      alert(1);
+    }
 
-     let topTileId: number = tileMapId[y - 1][x];
-     let rightTileId: number = tileMapId[y - 1][x + 1];
-     let bottomTileId: number = tileMapId[y + 1][x];
-     let leftTileId: number = tileMapId[y + 1][x - 1];
-     let currentTile = tiles.find((x) => x.id === currentTileId);
-     let topTile = tiles.find((x) => x.id === topTileId);
-     let rightTile = tiles.find((x) => x.id === rightTileId);
-     let bottomTile = tiles.find((x) => x.id === bottomTileId);
-     let leftTile = tiles.find((x) => x.id === leftTileId);
-     let commonIds = innerJoin([
-       currentTile?.related.north,
-       currentTile?.related.south,
-       currentTile?.related.east,
-       currentTile?.related.west,
-     ]);
+    let topTileId: number = tileMapId[y - 1][x];
+    let rightTileId: number = tileMapId[y - 1][x + 1];
+    let bottomTileId: number = tileMapId[y + 1][x];
+    let leftTileId: number = tileMapId[y + 1][x - 1];
+    let currentTile = tiles.find((x) => x.id === currentTileId);
+    let topTile = tiles.find((x) => x.id === topTileId);
+    let rightTile = tiles.find((x) => x.id === rightTileId);
+    let bottomTile = tiles.find((x) => x.id === bottomTileId);
+    let leftTile = tiles.find((x) => x.id === leftTileId);
+    let commonIds = innerJoin([
+      currentTile?.related.north,
+      currentTile?.related.south,
+      currentTile?.related.east,
+      currentTile?.related.west,
+    ]);
     const proposalId = getRandomElement(commonIds);
     return proposalId ?? -1;
-   }
-   else {
+  } else {
     //return 1;
-    return Math.floor(Math.random() *6 ) + 1
-   }
-}
-
-
-const coords = {
-  north : (i:number,j:number): {i:number,j:number} => {
-      return {
-        i:i,
-        j:j-1
-      }
-  },
-  south : (i:number,j:number): {i:number,j:number} => {
-    return {
-      i:i,
-      j:j+1
-    }
-  },
-  east : (i:number,j:number): {i:number,j:number} => {
-    return {
-      i:i+1,
-      j:j-1
-    }
-  },
-  west : (i:number,j:number): {i:number,j:number} => {
-    return {
-      i:i-1,
-      j:j+1
-    }
-  },
-  //
-  northEast: (i:number,j:number): {i:number,j:number} => {
-    return {
-      i:i+1,
-      j:j-2
-    }
-  },
-  northWest: (i:number,j:number): {i:number,j:number} => {
-    return {
-      i:i-1,
-      j:j
-    }
-  },
-  southEast: (i:number,j:number): {i:number,j:number} => {
-    const off = -((j) % 2);
-    return {
-      i:i + 1,
-      j:j
-    }
-  },
-  southWest: (i:number,j:number): {i:number,j:number} => {
-    return {
-      i:i - 1,
-      j:j + 2
-    }
+    return Math.floor(Math.random() * 6) + 1;
   }
 }
 
-async function generateMap(cols:number, rows:number, tiles: Tile[]) :Promise<TileMapId> {
-  
-  
+const coords = {
+  north: (i: number, j: number): { i: number; j: number } => {
+    return {
+      i: i,
+      j: j - 1,
+    };
+  },
+  south: (i: number, j: number): { i: number; j: number } => {
+    return {
+      i: i,
+      j: j + 1,
+    };
+  },
+  east: (i: number, j: number): { i: number; j: number } => {
+    return {
+      i: i + 1,
+      j: j - 1,
+    };
+  },
+  west: (i: number, j: number): { i: number; j: number } => {
+    return {
+      i: i - 1,
+      j: j + 1,
+    };
+  },
+  //
+  northEast: (i: number, j: number): { i: number; j: number } => {
+    return {
+      i: i + 1,
+      j: j - 2,
+    };
+  },
+  northWest: (i: number, j: number): { i: number; j: number } => {
+    return {
+      i: i - 1,
+      j: j,
+    };
+  },
+  southEast: (i: number, j: number): { i: number; j: number } => {
+    const off = -(j % 2);
+    return {
+      i: i + 1,
+      j: j,
+    };
+  },
+  southWest: (i: number, j: number): { i: number; j: number } => {
+    return {
+      i: i - 1,
+      j: j + 2,
+    };
+  },
+};
+
+async function generateMap(cols: number, rows: number, tiles: Tile[]): Promise<TileMapId> {
   const tileMapId: TileMapId = [];
 
   // init with -1
   for (let i = 0; i < rows; i++) {
-    tileMapId[i] = Array(cols).fill( -1  );
+    tileMapId[i] = Array(cols).fill(-1);
   }
-  
 
-
-  /////let s:{i:number,j:number} = {
-  /////  i:2,j:1
-  /////}
-  /////tileMapId[s.j][s.i]=1 // seed // todo. invert matrix 
-/////
-  /////let s1 = coords.south(s.i,s.j)
-  /////tileMapId[s1.j][s1.i]=1 // seed // todo. invert matrix 
-  /////
-  /////s1 = coords.north(s.i,s.j)
-  /////tileMapId[s1.j][s1.i]=1 // seed // todo. invert matrix 
-/////
-  /////s1 = coords.east(s.i, s.j)
-  /////tileMapId[s1.j][s1.i]=1 // seed // todo. invert matrix 
-/////
-  /////s1 = coords.west(s.i,s.j)
-  /////tileMapId[s1.j][s1.i]=1 // seed // todo. invert matrix 
-
-  //s1 = coords.northEast(s.i,s.j) // KO
-  //tileMapId[s1.j][s1.i]=2 // seed // todo. invert matrix 
-  //s1 = coords.southEast(s.i,s.j) // KO
-  //tileMapId[s1.j][s1.i]=2 // seed // todo. invert matrix 
-  // s1 = coords.southWest(s.i,s.j)  // KO
-  // tileMapId[s1.j][s1.i]=2 // seed // todo. invert matrix 
-  
-  //s1 = coords.northWest(s.i,s.j)  // ko
-  //tileMapId[s1.j][s1.i]=2 // seed // todo. invert matrix 
-
-
-
-  debugGenerateMap(cols,rows,tileMapId)
+  debugGenerateMap(cols, rows, tileMapId);
 
   let iterator = iterateLeftToRightByRows(tileMapId);
   for (const value of iterator) {
-    if ( value.value === -1) {
+    if (value.value === -1) {
       //const _nexTileId = calculateTileForCell(value.i, value.j,cols, rows, tileMapId, tiles);
-      const _nexTileId = Math.floor(Math.random()*32)
+      const _nexTileId = Math.floor(Math.random() * 32);
 
       tileMapId[value.j][value.i] = _nexTileId;
-      //await delay(10); 
+      //await delay(10);
     }
-    debugGenerateMap(cols,rows,tileMapId)
+    debugGenerateMap(cols, rows, tileMapId);
   }
-
-
 
   //let iterator = iterateLeftToRightByRows(tileMapId);
   //for (const value of iterator) {
   //  if ( value.value === -1) {
   //    const _nexTileId = calculateTileForCell(value.i, value.j,cols, rows, tileMapId, tiles);
   //    tileMapId[value.j][value.i] = _nexTileId;
-  //    await delay(10); 
+  //    await delay(10);
   //  }
   //  debugGenerateMap(cols,rows,tileMapId)
   //}
-
-  
-  
-
- 
- 
 
   // generate map
   //let count=0;
@@ -243,71 +200,50 @@ async function generateMap(cols:number, rows:number, tiles: Tile[]) :Promise<Til
   //  for (let i = 0; i < cols; i++) {
   //    const _nexTileId = calculateTileForCell(i, j,cols, rows, tileMapId, tiles);
   //    tileMapId[j][i] = _nexTileId;
-  //    
-  //    await delay(10); 
+  //
+  //    await delay(10);
   //    debugGenerateMap(cols,rows,tileMapId)
-//
-//
+  //
+  //
   //  }
   //}
 
-
-  return tileMapId
+  return tileMapId;
 }
 
+function drawTiles(
+  cols: number,
+  rows: number,
+  tiles: Tile[],
+  tileMapId: TileMapId,
+  ctx: CanvasRenderingContext2D,
+  offsetX: number,
+  offsetY: number,
+) {
+  const _dX = -3 * tileDefWidth + offsetX;
+  const _dY = 0 + offsetY;
+  ctx.font = '12px monospace';
+  ctx.fillStyle = 'white';
 
-
-function drawTiles(cols:number, rows:number, tiles: Tile[], tileMapId:TileMapId, ctx: CanvasRenderingContext2D) {
-  let delay = 0;
-
-  //let nn = tileMapId
-//
-  //nn[0][0]=1   
-  //nn[2][2]=1  
-  //nn[3][2]=1  
-  //nn[4][2]=1  
-  //nn[2][3]=2  
-  //nn[4][1]=2  
-  //nn[1][3]=3  
-
-  // transpose map
-
-  //tileMapId[3][0]=1 
-
-
-
-
-  const _dX = - 3 * tileDefWidth;
-  const _dY = 0;
-  ctx.font = "12px monospace"
-  ctx.fillStyle = "white"
-
-
-
-  const offsetId = Math.floor(Math.random() * 10);
-  for (let j = 3; j < rows; j++) {
-    for (let i = 2; i < cols; i++) {
-     
-
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
       const _tile = tiles.find((x) => x.id === tileMapId[j][i]);
 
-      
       const img = _tile?.image;
 
-      let x = i * tileDefWidth 
+      let x = i * tileDefWidth;
       let y = j * 25;
 
-      if  ( (j + i) % 2  == 0 ) {
-        y 
+      if ((j + i) % 2 == 0) {
+        y;
         //x = x - tileDefWidth/2
       }
 
-      y = y + (i * (tileDefHeight / 2) * Math.cos(3.14/2))
-      x = x + (j * (tileDefWidth / 2) * Math.sin(3.14/2))
+      y = y + i * (tileDefHeight / 2) * Math.cos(3.14 / 2);
+      x = x + j * (tileDefWidth / 2) * Math.sin(3.14 / 2);
 
       const _y = y + 25;
       const _x = x + 50;
-
 
       if (img !== undefined) {
         if (img.height > 58) {
@@ -316,68 +252,78 @@ function drawTiles(cols:number, rows:number, tiles: Tile[], tileMapId:TileMapId,
         ctx.drawImage(img, x + _dX, y + _dY);
       }
 
-      drawPoint(ctx,  _x + _dX, _y + _dY, "blue");
+      drawPoint(ctx, _x + _dX, _y + _dY, 'blue');
 
       //drawPoint(ctx, _x + _dX, _y + _dY, "white");
-      ctx.fillStyle = "white"
-      ctx.fillText (`[${i},${j}]`,_x + _dX, _y + _dY)
-
+      ctx.fillStyle = 'white';
+      ctx.fillText(`[${i},${j}]`, _x + _dX, _y + _dY);
     }
   }
 }
 
-
-
-
 export async function main() {
+  tileMapActionListener.dispatch(
+    actionFactory('load_tile_map_from_file', { jsonPath: 'fjfdjsfjdfjds_TODO' }),
+  );
 
-  tileMapActionListener.dispatch ( actionFactory("load_tile_map_from_file",{jsonPath:"fjfdjsfjdfjds_TODO"}))
-
-
-  appStore.tileStore.getObservable('TILES').subscribe ( async (tiles) => {
-
-    const canvas = document?.getElementById("c01") as HTMLCanvasElement;
-    const ctx = canvas.getContext("2d");
+  appStore.tileStore.getObservable('TILES').subscribe(async (tiles) => {
+    const canvas = document?.getElementById('c01') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d');
     if (ctx && tiles.length) {
-      clearCanvas(ctx)
-      
-      const cols = 10;
-      const rows = 10;
-      const tileMapIds = await generateMap(cols, rows, tiles)
-      //appStore.tileMapStore.set ( 'TILE_MAP_ID', )
-      
+      clearCanvas(ctx);
+
+      const cols = 20;
+      const rows = 50;
+      const tileMapIds = await generateMap(cols, rows, tiles);
+
+      //appStore.tileMapStore.set('TILES', t);
+      await appStore.tileMapStore.setProp('TILES', 'tileMapIds', tileMapIds);
+      await appStore.tileMapStore.setProp('TILES', 'tiles', tiles);
 
       //const cols = 34;
+
       //const rows = 220;
-      drawTiles(cols, rows, tiles, tileMapIds, ctx);
+      //drawTiles(cols, rows, tiles, tileMapIds, ctx);
+    }
+  });
 
+  let cols = 1;
+  let rows = 1;
+  let offX = 1;
+  let offY = 1;
 
+  appStore.inputDevicesStore.getObservable('DEVICE').subscribe(async (state: InputDevicesState) => {
+    const canvas = document?.getElementById('c01') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d');
 
-    }  
-  })
+    console.log('Move map');
+    console.log(state.pos);
+    const _tiles = await appStore.tileMapStore.get('TILES');
 
-  appStore.inputDevicesStore.getObservable("DEVICE").subscribe ( async (state:InputDevicesState) => {
-      console.log ("Move map")
-      console.log (state.pos)
-  })
+    if (ctx && _tiles) {
+      clearCanvas(ctx);
+      offX = state.pos.x * 12.5;
+      offY = -state.pos.y * 12.5;
 
+      if (cols < 20) ++cols;
+      if (rows < 50) ++rows;
 
+      drawTiles(cols, rows, _tiles.tiles, _tiles.tileMapIds, ctx, ++offX, ++offY);
 
-  
+      console.log(_tiles);
+      //console.log(_tileMapIds);
+    }
+  });
 
   //const canvas = document?.getElementById("c01") as HTMLCanvasElement;
   //const ctx = canvas.getContext("2d");
   //if (ctx) {
   //  drawTiles(_tiles, ctx);
-//
+  //
   //  let counter = 0;
   //  setInterval(() => {
   //    //drawTiles(_tiles, ctx);
   //    //appStore.stringStore.set('HELLO', `and ${counter++}`)
   //  }, 500);
   //}
-
-
-
-
 }
