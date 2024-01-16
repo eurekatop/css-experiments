@@ -1,0 +1,102 @@
+<my-window>
+  <div class="window">
+    <div class="header">
+      <!-- acordion -->
+      <details>
+        <summary>Accordion 1</summary>
+        <p>Lorem</p>
+      </details>
+
+      <details open>
+        <summary>Accordion 2</summary>
+        <ul>
+          <li>FooBar Foo</li>
+          <li>Artificial intelligence</li>
+        </ul>
+      </details>
+
+      <!-- card -->
+      <article>I'm a card!</article>
+
+      <!-- a card with footer header -->
+      <article>
+        <header>Header</header>
+        Body
+        <footer>Footer</footer>
+      </article>
+
+      <!-- With checkboxes -->
+      <details role="list">
+        <summary aria-haspopup="listbox">Dropdown</summary>
+        <ul role="listbox">
+          <li>
+            <label>
+              <input type="checkbox" />
+              Banana
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" />
+              Watermelon
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" />
+              Apple
+            </label>
+          </li>
+        </ul>
+      </details>
+
+      <!-- brand -->
+      <nav>
+        <ul>
+          <li><strong>Brand</strong></li>
+        </ul>
+        <ul>
+          <li><a href="#">Link</a></li>
+          <li><a href="#">Link</a></li>
+          <li><a href="#">Link</a></li>
+          <li>
+            <details role="list" dir="rtl">
+              <summary aria-haspopup="listbox" role="link">Dropdown</summary>
+              <ul role="listbox">
+                <li><a>Action</a></li>
+                <li><a>Another action</a></li>
+                <li><a>Something else here</a></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </nav>
+
+      <button onclick="{moveWindow}">Mover</button>
+
+      <button onclick="{toggleCollapse}">Colapsar</button>
+    </div>
+    <div class="content">
+      <slot></slot>
+    </div>
+  </div>
+
+  <script>
+    export default {
+      moveWindow() {
+        // Lógica para mover la ventana
+      },
+      toggleCollapse() {
+        // Lógica para colapsar/expandir la ventana
+      },
+    }
+  </script>
+  <style>
+    .window {
+      width: 90vw;
+      margin-left: 5vw;
+      margin-right: 5vw;
+      border: var(--primary);
+    }
+  </style>
+</my-window>

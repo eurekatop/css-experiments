@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">mutiitu</string>
+    <string name="title_activity_main">mutiitu</string>
+    <string name="package_name">com.mutitu.app</string>
+    <string name="custom_url_scheme">com.mutitu.app</string>
+</resources>
